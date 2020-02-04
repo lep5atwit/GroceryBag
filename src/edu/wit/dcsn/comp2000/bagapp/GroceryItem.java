@@ -2,66 +2,133 @@ package edu.wit.dcsn.comp2000.bagapp;
 
 public class GroceryItem 
 	{
-	private String weight ; 
-	private String firmness ;
-	private String breakable ; 
+	final private String itemName ;
+	final private int weight ; 
+	final private int firmness ; 
+	final private boolean breakable ; //true if breakable, else false
+	final private int size ; // light - ex large, 1 - 4
 	
 	public GroceryItem() 
 		{
-		this.weight =	 "heavy" ;
-		this.firmness =  "firm" ;
-		this.breakable = "unbreakable" ;
+		
+		this.itemName =   "Default Item" ;
+		this.weight =	  1 ;
+		this.firmness =   1 ;
+		this.breakable =  true ;
+		this.size = 	  1 ;
 		
 		}
 	
 	public GroceryItem( String[] item )
 		{
+		this.itemName 			= item[ 0 ] ;
+		String itemSize 		= item[ 1 ] ;
+		String itemWeight		= item[ 2 ] ;
+		String itemFirmness		= item[ 3 ] ;
+		String itemBreakability = item[ 5 ] ;
 		
-		
-		
-		}
-	
-	
-	
-	
-	
-	/**
-	 * Takes in a line and splits it on the tabs, extracting the characteristics we want.
-	 * @param line
-	 */
-	public GroceryItem(String line) 
-		{
-		line.toLowerCase() ; 
-		String[] elements = line.split( "/t" ) ;
-	
-		int nameIsTwoWords = 0 ;
-		if( elements[ 1 ] != "large" || elements[ 1 ] != "medium" || elements[ 1 ] != "small" ) 
+		if( itemSize.equals( "small" ) )
 			{
-			nameIsTwoWords = 1 ;
+			this.size = 1 ;
 			
 			}
-		weight =    elements[ 1 ] ;
-		firmness =  elements[ 2 ] ;
-		breakable = elements[ 4 ] ;
+		else
+			{
+			if( itemSize.equals( "medium" ) )
+				{
+				this.size = 2 ;
+				
+				}
+			else
+				{
+				if( itemSize.equals( "large" ) )
+					{
+					this.size = 3 ;
+					
+					}
+				else
+					{
+					this.size = 4 ;
+					
+					}
+				}
+			}
 		
-		}
+		
+		if( itemWeight.equals( "light" ) )
+			{
+			this.weight = 1 ;
+			
+			}
+		else
+			{
+			if( itemWeight.equals( "medium" ) )
+				{
+					this.weight = 2 ;
+					
+				}
+			else
+				{
+				this.weight = 3 ;
+					
+				}
+					
+			}
+		
+			if( itemFirmness.equals( "light" ) )
+			{
+			this.firmness = 1 ;
+			
+			}
+		else
+			{
+			if( itemFirmness.equals( "medium" ) )
+				{
+					this.firmness = 2 ;
+					
+				}
+			else
+				{
+				this.firmness = 3 ;
+					
+				}
+					
+			}
+			
+			if( itemBreakability.equals( "breakable" ) ) 
+				{
+				this.breakable = true ;
+				
+				}
+			else
+				{
+				this.breakable = false ;
+				
+				}		
+			}
 	
-	public String getWeight() 
+	public int getWeight() 
 		{
 		return this.weight ;
 		
 		}
 	
-	public String getFirmness() 
+	public int getFirmness() 
 		{
 		return this.firmness;
 	
 		}
 	
-	public String getBreakable() 
+	public boolean getBreakable() 
 		{
 		return this.breakable;
 	
+		}
+	
+	public int getSize()
+		{
+		return this.size ;
+		
 		}
 	
 	}	
