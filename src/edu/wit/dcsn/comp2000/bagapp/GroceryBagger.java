@@ -12,27 +12,20 @@ public class GroceryBagger {
 		
 		// Creates items from groceries.txt
 		Scanner sc = new Scanner( System.in ) ; //replace with groceries.txt
-		ArrayList<String> items = new ArrayList<String>() ;
+		ArrayList<GroceryItem> groceries = new ArrayList<GroceryItem>() ;
 		while( sc.hasNext() )
 			{
-			items.add( sc.nextLine() ) ;
+			groceries.add( new GroceryItem ( sc.nextLine().split( "\t" ) ) ) ;
 			
-			}
-		
-		// Creates GroceryItems from the items
-		ArrayList<GroceryItem> groceries = new ArrayList<GroceryItem>() ;
-		for(int index = 0 ; index < items.size() ; index++ )
-			{
-			groceries.add( new GroceryItem( items.get( index ) ) ) ; 
-			
-			}	
-		// Creates a bag 
-		ResizableArrayBag<GroceryItem> bag = new ResizableArrayBag<GroceryItem>() ;
-		
+			}		
 		//Take GroceryItems and sorts them into bags
 		//All nonbreakables in one bag. remove from groceries
 		// parse the items into new bags
-		GroceryBag bags = new GroceryBag() ;
+		while( !groceries.isEmpty() )
+			{
+			
+			
+			}	
 		
 		
 		
