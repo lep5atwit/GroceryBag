@@ -21,6 +21,7 @@ public class GroceryBagger {
 		//Take GroceryItems and sorts them into bags
 		//All nonbreakables in one bag. remove from groceries
 		// parse the items into new bags
+		ArrayList<ResizableArrayBag<GroceryItem>> bagArray = new ArrayList<>() ;
 		while( !groceries.isEmpty() )
 			{
 			
