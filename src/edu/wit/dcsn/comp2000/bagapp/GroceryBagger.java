@@ -9,62 +9,100 @@ import edu.wit.dcsn.comp2000.bagadt.ResizableArrayBag;
 
 public class GroceryBagger {
 
-	public static void main(String args[]) throws FileNotFoundException {
-
+	public static void main( String args[] ) throws FileNotFoundException 
+		{
 		// Creates items from groceries.txt
-		Scanner sc = new Scanner(new File("./data/groceries.txt")); 
-		ArrayList<GroceryItem> groceries = new ArrayList<GroceryItem>();
-		while (sc.hasNext()) {
-			groceries.add(new GroceryItem(sc.nextLine().split("\t")));
+		Scanner sc 							= new Scanner( new File( "./data/groceries.txt" ) ) ; 
+		ArrayList<GroceryItem> groceries 	= new ArrayList<GroceryItem>() ;
+		
+		while ( sc.hasNext() )
+			{
+			groceries.add( new GroceryItem( sc.nextLine().split( "\t" ) ) ) ;
 
-		}
-		sc.close();
+			}
+		sc.close() ;
 		//sorts bags
-		ArrayList<ResizableArrayBag<GroceryItem>> bagArray = new ArrayList<ResizableArrayBag<GroceryItem>>();
-		bagArray = bagGroceries(groceries, bagArray);
+		ArrayList<ResizableArrayBag<GroceryItem>> bagArray 	= new ArrayList<>() ;
+		bagArray 											= bagGroceries( groceries, bagArray ) ;
 		
-		ResizableArrayBag<GroceryItem> currentBag;
-		GroceryItem item;
-		
-				String breakable;
-				String weight;
-				String firmness;
+		ResizableArrayBag<GroceryItem> currentBag ;
+		GroceryItem item ;
+		String breakable ;
+		String weight ;
+		String firmness ;
 		//prints bags
 			
-		for(int x=0; x < bagArray.size(); x++) { //traverse array of bags
-			System.out.printf("Bag %d:%n", x+1);
-			currentBag= bagArray.get(x);
-			for(int y = currentBag.getCurrentSize(); y>0 ; y--) { //traverse the contents of each bag 
-				if(currentBag.getCurrentSize()!=0) {
-					item = currentBag.remove();
-					//breakable
-					if(item.getBreakable()==true) {
-						 breakable = "breakable";
-					} else {
-						breakable= "unbreakable";
-					}
-					//weight
-					if(item.getWeight()==1) {
-						weight = "light";
-					} else if(item.getWeight()==2) {
-						weight = "medium";
-					} else {
-						weight = "heavy";
-					}
-					//firmness
-					if(item.getFirmness()==1) {
-						firmness = "soft";
-					} else if(item.getFirmness()==2) {
-						firmness = "firm";
-					} else {
-						firmness = "hard";
-					}
-					System.out.printf("	%s(%s):	%s,	%s,	%s%n", item.getItemName(), item.getSize(), breakable, weight, firmness);
-				}
-			}
+		for( int bagInArr = 0 ; bagInArr < bagArray.size() ; bagInArr++ ) //traverse array of bags
+			{
+			System.out.printf( "Bag %d:%n", bagInArr + 1 ) ;
+			currentBag = bagArray.get( bagInArr ) ;
 			
+			for( int itemIndex = 0 ; itemIndex < currentBag.getCurrentSize() ; ) //traverse the contents of each bag 
+				{ 
+				item = currentBag.remove() ;
+				
+				if( item.getBreakable() )
+					{
+					breakable = "breakable" ;
+					
+					}
+				else
+					{
+					breakable = "nonbreakable" ;
+					
+					}
+
+
+				if( item.getWeight() == 1 )
+					{
+					weight = "light" ;
+					
+					} 
+				else 
+					{
+					if( item.getWeight() == 2 ) 
+						{
+						weight = "medium" ;
+						
+						}
+					else 
+						{
+						weight = "heavy" ;
+						
+						}
+					
+					}
+
+				if( item.getFirmness() == 1 )
+					{
+					firmness = "soft" ;
+					
+					}
+				else 
+					{
+					if( item.getFirmness() == 2 ) 
+						{
+						firmness = "firm" ;
+						
+						}
+					else 
+						{
+						firmness = "hard" ;
+						
+						}
+					
+					}
+				System.out.printf( "	%s(%s):	%s,	%s,	%s%n",
+								   item.getItemName(),
+								   item.getSize(),
+								   breakable,
+								   weight,
+								   firmness ) ;
+				}
+			
+			}
+		
 		}
-	}
 
 	/** 
 	 * Method to sort a GroceryItem array-list into Bags
@@ -72,13 +110,14 @@ public class GroceryBagger {
 	 * @param bagArray
 	 * @return bagArray array of sorted bags
 	 */
-	public static ArrayList<ResizableArrayBag<GroceryItem>> bagGroceries(ArrayList<GroceryItem> groceries, ArrayList<ResizableArrayBag<GroceryItem>> bagArray) {
-		//Initialize variables
-		ResizableArrayBag<GroceryItem> bag = new ResizableArrayBag<GroceryItem>();
-		String s = "item large heavy hard rigid unbreakable unperishable";
-		String[] sArr= s.split(" ");
-		GroceryItem previousItem = new GroceryItem(sArr); // TODO: Initialize to an unbreakable at the lowest tier
-		int size=0; 
+	public static ArrayList<ResizableArrayBag<GroceryItem>> bagGroceries( ArrayList<GroceryItem> groceries,
+																		  ArrayList<ResizableArrayBag<GroceryItem>> bagArray ) 
+		{
+		ResizableArrayBag<GroceryItem> bag = new ResizableArrayBag<GroceryItem>() ;
+		String s 					= "item large heavy hard rigid unbreakable unperishable" ;
+		String[] sArr 				= s.split( " " ) ;
+		GroceryItem previousItem 	= new GroceryItem(sArr); // TODO: Initialize to an unbreakable at the lowest tier
+		int size					= 0 ; 
 		// Traverse the groceries, placing them into bags
 		for (int i = 0; i < groceries.size(); i++) {
 			

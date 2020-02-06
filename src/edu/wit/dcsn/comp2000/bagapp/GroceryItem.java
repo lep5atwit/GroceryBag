@@ -51,10 +51,10 @@ public class GroceryItem implements Comparable<GroceryItem>
 					this.size = 4 ;
 					
 					}
+				
 				}
-			}
-		
-		
+			
+			}		
 		if( itemWeight.equals( "light" ) )
 			{
 			this.weight = 1 ;
@@ -80,21 +80,22 @@ public class GroceryItem implements Comparable<GroceryItem>
 			this.firmness = 1 ;
 			
 			}
+			
 		else
 			{
 			if( itemFirmness.equals( "medium" ) )
 				{
-					this.firmness = 2 ;
+				this.firmness = 2 ;
 					
 				}
+			
 			else
 				{
 				this.firmness = 3 ;
 					
 				}
-					
-			}
 			
+			}
 			if( itemBreakability.equals( "breakable" ) ) 
 				{
 				this.breakable = true ;
@@ -105,11 +106,13 @@ public class GroceryItem implements Comparable<GroceryItem>
 				this.breakable = false ;
 				
 				}		
+			
 			}
 	
 	@Override
 	/**
-	 * 
+	 * Compares two items to determine if one can be put in a bag
+	 * @return -1 yes, 0 program specific, 1 no
 	 */
 	public int compareTo( GroceryItem otherItem )
 		{
@@ -161,13 +164,13 @@ public class GroceryItem implements Comparable<GroceryItem>
 	
 	public int getFirmness() 
 		{
-		return this.firmness;
+		return this.firmness ;
 	
 		}
 	
 	public boolean getBreakable() 
 		{
-		return this.breakable;
+		return this.breakable ;
 	
 		}
 	
@@ -179,6 +182,8 @@ public class GroceryItem implements Comparable<GroceryItem>
 	
 	public String getItemName()
 		{
-		return this.itemName;
+		return this.itemName ;
 
-		}	
+		}
+	
+	}
