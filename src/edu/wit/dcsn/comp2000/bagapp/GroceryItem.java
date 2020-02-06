@@ -1,6 +1,6 @@
 package edu.wit.dcsn.comp2000.bagapp;
 
-public class GroceryItem 
+public class GroceryItem implements Comparable<GroceryItem>
 	{
 	final private String itemName ;
 	final private int weight ; 
@@ -107,6 +107,52 @@ public class GroceryItem
 				}		
 			}
 	
+	@Override
+	/**
+	 * 
+	 */
+	public int compareTo( GroceryItem otherItem )
+		{
+		if( this.breakable && otherItem.getBreakable() )
+			{
+			if( this.weight == otherItem.getWeight() )
+				{
+				if( this.firmness == otherItem.getFirmness() )
+					{
+					return 0 ;
+					
+					}
+				else if( this.firmness < otherItem.getFirmness() )
+					{
+					return -1 ;
+					
+					}
+				return 1 ;
+								
+				}
+			else if( this.weight < otherItem.getWeight() )
+				{
+				return -1 ;
+				
+				}
+			return 1 ;
+			
+			}
+		else if( this.breakable && !otherItem.getBreakable() )
+			{
+			return -1 ;
+		
+			}
+		else if( !this.breakable && otherItem.getBreakable() )
+			{
+			return 1 ;
+			
+			}
+		//When both items are not breakable
+		return 0 ;
+			
+		}
+
 	public int getWeight() 
 		{
 		return this.weight ;
@@ -130,5 +176,5 @@ public class GroceryItem
 		return this.size ;
 		
 		}
-	
+
 	}	
