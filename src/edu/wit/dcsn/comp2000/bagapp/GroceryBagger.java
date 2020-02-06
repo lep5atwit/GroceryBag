@@ -1,3 +1,4 @@
+
 package edu.wit.dcsn.comp2000.bagapp;
 
 import java.io.File;
@@ -21,6 +22,7 @@ public class GroceryBagger {
 
 			}
 		sc.close() ;
+		
 		//sorts bags
 		ArrayList<ResizableArrayBag<GroceryItem>> bagArray 	= new ArrayList<>() ;
 		bagArray 											= bagGroceries( groceries, bagArray ) ;
@@ -37,6 +39,8 @@ public class GroceryBagger {
 			System.out.printf( "Bag %d:%n", bagInArr + 1 ) ;
 			currentBag = bagArray.get( bagInArr ) ;
 			
+			
+		
 			for( int itemIndex = 0 ; itemIndex < currentBag.getCurrentSize() ; ) //traverse the contents of each bag 
 				{ 
 				item = currentBag.remove() ;
@@ -124,7 +128,7 @@ public class GroceryBagger {
 			if (previousItem.compareTo(groceries.get(i)) != 1) {
 				
 				// Placing a item into a full bag...
-				if (size+groceries.get(i).getSize()>25) {  //Add current size to grocery size > 25n
+				if (size+groceries.get(i).getSize()>25) { 
 					bagArray.add(bag);
 					bag= new ResizableArrayBag<GroceryItem>();
 					size =0;
@@ -134,23 +138,29 @@ public class GroceryBagger {
 				
 				// Placing a item into a bag...
 				if (size+groceries.get(i).getSize()<=25) {
-					bag.add(groceries.get(i)); // add the groceryItem into the bag
+					bag.add(groceries.get(i)); 
 					size=size+groceries.get(i).getSize(); //		
 				}
 				
 			} 
 			
-			else { //Unable to place the item in this bag 
-				bagArray.add(bag); // Get a new bag for it
+			//Unable to place the item in this bag 
+			else { 
+				bagArray.add(bag); 
 				bag=new ResizableArrayBag<GroceryItem>();
 				size=0;
 				bag.add(groceries.get(i));
 				size=size+ groceries.get(i).getSize();
 
 			}
+			
+			//Places the last bag into bagArray
+			if(i==groceries.size()-1 && bag.getCurrentSize()!=0) {
+				bagArray.add(bag);
+			}
 
 		}
-
+		
 		return bagArray;
 
 	}
