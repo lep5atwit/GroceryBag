@@ -176,5 +176,9 @@ public class GroceryItem implements Comparable<GroceryItem>
 		return this.size ;
 		
 		}
+	
+	public String getItemName()
+		{
+		return this.itemName;
 
-	}	
+		}	
