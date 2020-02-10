@@ -118,49 +118,57 @@ public class GroceryBagger {
 																		  ArrayList<ResizableArrayBag<GroceryItem>> bagArray ) 
 		{
 		ResizableArrayBag<GroceryItem> bag = new ResizableArrayBag<GroceryItem>() ;
-		String s 					= "item large heavy hard rigid unbreakable unperishable" ;
-		String[] sArr 				= s.split( " " ) ;
-		GroceryItem previousItem 	= new GroceryItem(sArr); // TODO: Initialize to an unbreakable at the lowest tier
-		int size					= 0 ; 
+		String[] stringArr				   = "item large heavy hard rigid unbreakable unperishable".split( " " ) ;
+		GroceryItem previousItem 		   = new GroceryItem( stringArr ) ; // TODO: Initialize to an unbreakable at the lowest tier
+		int bagCapacity					   = 0 ; 
 		// Traverse the groceries, placing them into bags
-		for (int i = 0; i < groceries.size(); i++) {
-			
-			if (previousItem.compareTo(groceries.get(i)) != 1) {
-				
+		for ( int index = 0 ; index < groceries.size() ; index++ ) 
+			{
+			GroceryItem item = groceries.get( index ) ;
+			if ( previousItem.compareTo( item ) != 1 ) 
+				{
 				// Placing a item into a full bag...
-				if (size+groceries.get(i).getSize()>25) { 
-					bagArray.add(bag);
-					bag= new ResizableArrayBag<GroceryItem>();
-					size =0;
-					bag.add(groceries.get(i));
-					size= groceries.get(i).getSize()+size; 
-				}
-				
+				if ( bagCapacity + item.getSize() > 25 )
+					{ 
+					bagArray.add( bag ) ;
+					bag  = new ResizableArrayBag<GroceryItem>() ;
+					bagCapacity = 0 ;
+					bag.add(item ) ;
+					bagCapacity = item.getSize() + bagCapacity ; 
+					
+					}
 				// Placing a item into a bag...
-				if (size+groceries.get(i).getSize()<=25) {
-					bag.add(groceries.get(i)); 
-					size=size+groceries.get(i).getSize(); //		
-				}
+				else 
+					{
+					if ( bagCapacity + item.getSize() <= 25 ) 
+						{
+						bag.add( item ) ; 
+						bagCapacity = bagCapacity + item.getSize() ;	
+					
+						}
+					
+					}
 				
-			} 
-			
+				} 
 			//Unable to place the item in this bag 
-			else { 
-				bagArray.add(bag); 
-				bag=new ResizableArrayBag<GroceryItem>();
-				size=0;
-				bag.add(groceries.get(i));
-				size=size+ groceries.get(i).getSize();
+			else
+				{ 
+				bagArray.add( bag ) ; 
+				bag  = new ResizableArrayBag<GroceryItem>() ;
+				bagCapacity = 0 ;
+				bag.add( item ) ;
+				bagCapacity = bagCapacity + item.getSize() ;
 
-			}
+				}
 			
 			//Places the last bag into bagArray
-			if(i==groceries.size()-1 && bag.getCurrentSize()!=0) {
-				bagArray.add(bag);
-			}
+			if( index == groceries.size() - 1 && !bag.isEmpty() )
+				{
+				bagArray.add( bag ) ;
+				
+				}
 
-		}
-		
+			}
 		return bagArray;
 
 	}

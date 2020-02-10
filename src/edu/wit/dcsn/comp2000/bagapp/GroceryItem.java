@@ -75,7 +75,7 @@ public class GroceryItem implements Comparable<GroceryItem>
 					
 			}
 		
-			if( itemFirmness.equals( "light" ) )
+			if( itemFirmness.equals( "soft" ) )
 			{
 			this.firmness = 1 ;
 			
@@ -83,7 +83,7 @@ public class GroceryItem implements Comparable<GroceryItem>
 			
 		else
 			{
-			if( itemFirmness.equals( "medium" ) )
+			if( itemFirmness.equals( "firm" ) )
 				{
 				this.firmness = 2 ;
 					
