@@ -1,4 +1,3 @@
-
 package edu.wit.dcsn.comp2000.bagapp;
 
 import java.io.File;
@@ -29,84 +28,23 @@ public class GroceryBagger {
 		
 		ResizableArrayBag<GroceryItem> currentBag ;
 		GroceryItem item ;
-		String breakable ;
-		String weight ;
-		String firmness ;
+		
 		//prints bags
-			
 		for( int bagInArr = 0 ; bagInArr < bagArray.size() ; bagInArr++ ) //traverse array of bags
 			{
 			System.out.printf( "Bag %d:%n", bagInArr + 1 ) ;
 			currentBag = bagArray.get( bagInArr ) ;
 			
-			
-		
 			for( int itemIndex = 0 ; itemIndex < currentBag.getCurrentSize() ; ) //traverse the contents of each bag 
 				{ 
 				item = currentBag.remove() ;
+				System.out.println( item.toString());
 				
-				if( item.getBreakable() )
-					{
-					breakable = "breakable" ;
-					
-					}
-				else
-					{
-					breakable = "nonbreakable" ;
-					
-					}
-
-
-				if( item.getWeight() == 1 )
-					{
-					weight = "light" ;
-					
-					} 
-				else 
-					{
-					if( item.getWeight() == 2 ) 
-						{
-						weight = "medium" ;
-						
-						}
-					else 
-						{
-						weight = "heavy" ;
-						
-						}
-					
-					}
-
-				if( item.getFirmness() == 1 )
-					{
-					firmness = "soft" ;
-					
-					}
-				else 
-					{
-					if( item.getFirmness() == 2 ) 
-						{
-						firmness = "firm" ;
-						
-						}
-					else 
-						{
-						firmness = "hard" ;
-						
-						}
-					
-					}
-				System.out.printf( "	%s(%s):	%s,	%s,	%s%n",
-								   item.getItemName(),
-								   item.getSize(),
-								   breakable,
-								   weight,
-								   firmness ) ;
 				}
 			
 			}
 		
-		}
+		}	
 
 	/** 
 	 * Method to sort a GroceryItem array-list into Bags
